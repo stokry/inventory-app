@@ -1,0 +1,23 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<h2>Assign Equipment</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Select Employee:</label><br>
+    <select name="employee">
+        {% for employee in employees %}
+        <option value="{{ employee.id }}">{{ employee.user.username }}</option>
+        {% endfor %}
+    </select><br><br>
+    <label>Select Equipment:</label><br>
+    <select name="equipment">
+        {% for item in equipment %}
+        <option value="{{ item.id }}">{{ item.name }} ({{ item.serial_number }})</option>
+        {% endfor %}
+    </select><br><br>
+    <button type="submit">Assign</button>
+</form>
+{% for message in messages %}
+<p style="color:green;">{{ message }}</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<h2>All Equipment Assignments</h2>
+<table border="1">
+    <tr>
+        <th>Employee</th>
+        <th>Equipment Name</th>
+        <th>Serial Number</th>
+        <th>Assigned Date</th>
+    </tr>
+    {% for assignment in assignments %}
+    <tr>
+        <td>{{ assignment.employee.user.username }}</td>
+        <td>{{ assignment.equipment.name }}</td>
+        <td>{{ assignment.equipment.serial_number }}</td>
+        <td>{{ assignment.assigned_date }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No assignments found.</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'assign_equipment' %}">Assign New Equipment</a>
+{% endblock %}
